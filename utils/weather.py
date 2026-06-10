@@ -1,11 +1,15 @@
 """
 utils/weather.py
+----------------
 OpenWeatherMap API helper with session-state caching.
 """
+
 import time
 import requests
 import streamlit as st
 from .constants import OWM_API_KEY, CACHE_TTL
+
+
 def get_weather(district: str, lat: float, lon: float, L: dict):
     """
     Fetch weather for a district. Caches in session_state for CACHE_TTL seconds.
@@ -20,6 +24,7 @@ def get_weather(district: str, lat: float, lon: float, L: dict):
         if age < CACHE_TTL:
             mins_left = int((CACHE_TTL - age) / 60)
             return cached["data"], f"{L['cache']} ({mins_left} min)"
+
     try:
         url = (
             f"https://api.openweathermap.org/data/2.5/weather"
