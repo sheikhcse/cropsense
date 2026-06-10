@@ -1,19 +1,14 @@
 """
 components/auth_page.py
------------------------
 Renders the Login / Register UI when user is not logged in.
 """
-
 import streamlit as st
 from database import register_user, login_user, get_user_count
 from utils.constants import T
-
-
 def render_auth_page():
     """Show login/register UI. Returns True if user just logged in."""
     lang = st.session_state.get("lang", "bn")
     L    = T[lang]
-
     # Language selector top-right
     _, _, col3 = st.columns([3, 1, 1])
     with col3:
@@ -35,7 +30,7 @@ def render_auth_page():
     with col_m:
         login_t, reg_t = st.tabs([L["login_tab"], L["register_tab"]])
 
-        # ── LOGIN ────────────────────────────────────────────────────────────
+        #  LOGIN 
         with login_t:
             st.markdown(f"#### {L['login_title']}")
             uname = st.text_input(L["username"], key="li_user", placeholder="username")
@@ -55,7 +50,7 @@ def render_auth_page():
                         if lang == "en" else
                         "কোনো অ্যাকাউন্ট নেই। 'নতুন অ্যাকাউন্ট' ট্যাবে গিয়ে তৈরি করুন।")
 
-        # ── REGISTER ─────────────────────────────────────────────────────────
+        #  REGISTER 
         with reg_t:
             st.markdown(f"#### {L['register_title']}")
             new_user  = st.text_input(L["username"],         key="reg_user", placeholder="username")
