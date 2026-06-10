@@ -1,25 +1,18 @@
 """
 database/db.py
---------------
 SQLite database for CropSense AI user management.
 Uses SQLAlchemy for ORM and bcrypt for password hashing.
 """
-
 import sqlite3
 import hashlib
 import os
 from datetime import datetime
-
 DB_PATH = os.path.join(os.path.dirname(__file__), "cropsense.db")
-
-
 def get_connection():
     """Return a SQLite connection."""
     conn = sqlite3.connect(DB_PATH, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     return conn
-
-
 def init_db():
     """Create tables if they don't exist."""
     conn = get_connection()
@@ -47,14 +40,9 @@ def init_db():
     """)
     conn.commit()
     conn.close()
-
-
 def _hash_pw(password: str) -> str:
     return hashlib.sha256(password.encode()).hexdigest()
-
-
-# ── User operations ──────────────────────────────────────────────────────────
-
+#  User operations 
 def register_user(username: str, password: str):
     """Register a new user. Returns (ok: bool, reason: str)."""
     if len(username) < 3:
@@ -73,8 +61,6 @@ def register_user(username: str, password: str):
         return False, "already_exists"
     finally:
         conn.close()
-
-
 def login_user(username: str, password: str) -> bool:
     """Verify credentials. Returns True on success."""
     conn = get_connection()
@@ -86,8 +72,6 @@ def login_user(username: str, password: str) -> bool:
         _update_last_login(username)
         return True
     return False
-
-
 def _update_last_login(username: str):
     conn = get_connection()
     conn.execute(
@@ -96,17 +80,12 @@ def _update_last_login(username: str):
     )
     conn.commit()
     conn.close()
-
-
 def get_user_count() -> int:
     conn = get_connection()
     count = conn.execute("SELECT COUNT(*) FROM users").fetchone()[0]
     conn.close()
     return count
-
-
-# ── Prediction history ────────────────────────────────────────────────────────
-
+#  Prediction history 
 def save_prediction(username, crop_type, district, yield_pred, total_yield, field_area):
     conn = get_connection()
     conn.execute(
@@ -118,8 +97,6 @@ def save_prediction(username, crop_type, district, yield_pred, total_yield, fiel
     )
     conn.commit()
     conn.close()
-
-
 def get_user_predictions(username: str, limit: int = 20):
     conn = get_connection()
     rows = conn.execute(
