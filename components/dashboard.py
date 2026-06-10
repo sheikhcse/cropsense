@@ -1,28 +1,21 @@
 """
 components/dashboard.py
------------------------
 Renders the 5 analytics tabs after prediction.
 """
-
 import numpy as np
 import pandas as pd
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
-
 from database import save_prediction, get_user_predictions
 from utils.model import run_prediction
 from utils.constants import T
-
-
 LY = dict(
     plot_bgcolor="rgba(0,0,0,0)",
     paper_bgcolor="rgba(0,0,0,0)",
     font_color="#e2e8f0",
     title_font_size=14,
 )
-
-
 def render_kpis(p: dict, cavg: float, lang: str):
     L  = T[lang]
     dl = (p["ph"] - cavg) / cavg * 100 if cavg > 0 else 0
@@ -45,8 +38,6 @@ def render_kpis(p: dict, cavg: float, lang: str):
         st.info(L["good"].format(ct=p["ct"]))
     else:
         st.warning(L["warn"])
-
-
 def render_tabs(inputs, model_bundle, df, lang):
     L                   = T[lang]
     model, scaler, le_crop, le_soil, le_season, le_irr, FN, _, met = model_bundle
@@ -61,7 +52,7 @@ def render_tabs(inputs, model_bundle, df, lang):
         [L["tab1"], L["tab2"], L["tab3"], L["tab4"], L["tab5"]]
     )
 
-    # ── Tab 1: Analytics ─────────────────────────────────────────────────────
+    # Tab 1: Analytics 
     with tab1:
         ca, cb = st.columns([3, 2])
         with ca:
@@ -119,7 +110,7 @@ def render_tabs(inputs, model_bundle, df, lang):
             f4.update_layout(title=L["top10"], xaxis_title=L["avg_yield"], **LY)
             st.plotly_chart(f4, use_container_width=True)
 
-    # ── Tab 2: Feature Impact ─────────────────────────────────────────────────
+    #  Tab 2: Feature Impact 
     with tab2:
         st.markdown(f"### {L['feature_title']}")
         imp = model.feature_importances_
@@ -167,7 +158,7 @@ def render_tabs(inputs, model_bundle, df, lang):
                          xaxis_title=sel, yaxis_title="t/ha", **LY)
         st.plotly_chart(f6, use_container_width=True)
 
-    # ── Tab 3: Data ───────────────────────────────────────────────────────────
+    #  Tab 3: Data 
     with tab3:
         st.markdown(f"### {L['data_title']}")
         m1, m2, m3 = st.columns(3)
@@ -183,7 +174,7 @@ def render_tabs(inputs, model_bundle, df, lang):
         with st.expander(L["raw_data"]):
             st.dataframe(df.head(200), use_container_width=True)
 
-    # ── Tab 4: Model Report ───────────────────────────────────────────────────
+    #  Tab 4: Model Report 
     with tab4:
         st.markdown(f"### {L['model_title']}")
         a, b, c, d = st.columns(4)
@@ -225,7 +216,7 @@ def render_tabs(inputs, model_bundle, df, lang):
         f8.update_layout(xaxis_title="Actual (t/ha)", yaxis_title="Predicted (t/ha)", **LY)
         st.plotly_chart(f8, use_container_width=True)
 
-    # ── Tab 5: My Prediction History ──────────────────────────────────────────
+    #  Tab 5: My Prediction History 
     with tab5:
         st.markdown(f"### {L['history_title']}")
         username = st.session_state.get("username", "")
