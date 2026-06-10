@@ -6,7 +6,7 @@ import streamlit as st
 
 #  Page config (must be first Streamlit call) 
 st.set_page_config(
-    page_title="CropSense AI",
+    page_title="CropSense",
     layout="wide",
     initial_sidebar_state="expanded",
 )
