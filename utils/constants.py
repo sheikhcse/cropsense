@@ -1,10 +1,9 @@
 """
 utils/constants.py
-------------------
 All static data: districts, crops, soils, translations.
 """
 
-# ── Districts ─────────────────────────────────────────────────────────────────
+#  Districts 
 DISTRICTS = {
     "Dhaka":         (23.8103, 90.4125),
     "Chittagong":    (22.3569, 91.7832),
@@ -36,7 +35,7 @@ RAIN_MAP = {
     "Brahmanbaria": 1750, "Gazipur": 1650, "Narayanganj": 1600, "Manikganj": 1600,
 }
 
-# ── Crops ─────────────────────────────────────────────────────────────────────
+#  Crops 
 CROPS = {
     "ধান-বোরো":   {"base": 4.8,  "to": 25, "ro": 1200, "ns": 0.020},
     "ধান-আমন":    {"base": 3.5,  "to": 28, "ro": 1800, "ns": 0.015},
@@ -55,7 +54,7 @@ CROPS = {
     "সয়াবিন":     {"base": 2.8,  "to": 25, "ro": 700,  "ns": 0.014},
 }
 
-# ── Soil / irrigation ─────────────────────────────────────────────────────────
+#  Soil / irrigation 
 SOILS   = ["দোআঁশ (Loamy)", "এঁটেল (Clay)", "বেলে (Sandy)",
            "পলি (Silty)", "বেলে-দোআঁশ (Sandy Loam)", "এঁটেল-দোআঁশ (Clay Loam)"]
 
@@ -76,11 +75,11 @@ IM = {
     "স্প্রিংকলার": 1.12, "খাল/নদী": 0.95,
 }
 
-# ── API ───────────────────────────────────────────────────────────────────────
+#  API 
 OWM_API_KEY = "73b5368b5362fd8d3c573da5ed0e9ab0"
 CACHE_TTL   = 3600   # seconds
 
-# ── Translations ──────────────────────────────────────────────────────────────
+#  Translations 
 T = {
     "en": {
         "title": "CropSense AI",
