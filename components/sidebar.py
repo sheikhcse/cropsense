@@ -1,18 +1,13 @@
 """
 components/sidebar.py
----------------------
 Renders the full sidebar: language, logout, district, crop, weather, soil inputs.
 Returns all user inputs as a dict.
 """
-
 import streamlit as st
 from utils.constants import T, DISTRICTS, RAIN_MAP, SOILS, SEASONS, IRRS
 from utils.weather import get_weather
-
-
 def render_sidebar(le_crop, le_soil, le_season, le_irr) -> dict:
     lang = st.session_state.get("lang", "bn")
-
     with st.sidebar:
         # Language + Logout
         col_lang, col_out = st.columns(2)
