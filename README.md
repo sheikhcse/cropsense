@@ -1,4 +1,4 @@
-# 🌾 CropSense AI
+#  CropSense AI
 
 Real-time weather-based crop yield prediction for Bangladesh agriculture.
 
@@ -38,11 +38,11 @@ streamlit run app.py
 ```
 
 ## Features
-- 🔐 SQLite user authentication (register/login/logout)
-- 📊 Prediction history saved per user in database
-- 🌦️ Real-time weather from OpenWeatherMap (1hr cache)
-- 🤖 Random Forest ML model with 5-fold cross validation
-- 📈 5 analytics tabs: charts, feature impact, data explorer, model report, history
+-  SQLite user authentication (register/login/logout)
+-  Prediction history saved per user in database
+-  Real-time weather from OpenWeatherMap (1hr cache)
+-  Random Forest ML model with 5-fold cross validation
+-  5 analytics tabs: charts, feature impact, data explorer, model report, history
 - 🇧🇩 Bilingual: বাংলা / English
 
 ## Database Tables
